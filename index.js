@@ -1,121 +1,140 @@
-document.getElementById("bai1").onclick = function(){
-    document.getElementById("b1").style.display = "block";
-    document.getElementById("b2").style.display = "none"
-    document.getElementById("b3").style.display = "none"
-    document.getElementById("b4").style.display = "none"
-    document.getElementById("calc1").onclick = function(){
-        let num_1 = +document.getElementById("num-1").value
-        let num_2 = +document.getElementById("num-2").value
-        let num_3 = +document.getElementById("num-3").value
-        let area = +document.getElementById("area").value 
-        let object = +document.getElementById("object").value
-        let standard = +document.getElementById("standard").value
-        let score = num_1+num_2+num_3+area+object
-        if((num_1 <= 0)||(num_2 <= 0)||(num_3 <= 0)){
-            document.getElementById("resutl1").innerHTML = " Bạn đã rớt do có môn bé hơn hoặc bằng 0"
+function getElement(text){
+    return document.getElementById(text)
+}
+let list = []
+let list2 = [];
+function getinfo(){
+    list.push(+getElement("inputFirst").value);
+    getElement("addNum").innerHTML += getElement("inputFirst").value + ","    
+}
+function intSum(){
+    getElement("addNum1").innerHTML = list.reduce(function(sum,value){
+        if(value >= 0){
+            return sum + value;
         }
-        if(score>=standard){
-            document.getElementById("result1").innerHTML = "Bạn đã đậu . Tổng điểm là : " + score
-        }else{
-            document.getElementById("result1").innerHTML = "Bạn đã rớt. Tổng điểm là : " + score
+    })
+}
+function intCount(){
+    let count = list.filter((value)=>value>=0) ;
+    getElement("addNum2").innerHTML = count.length
+}
+function min(){
+    let min = list[0];
+    for(let i = 0 ; i < list.length;i++){
+        if(list[i] < min ){
+            min = list[i];
         }
-        
+    }
+    getElement("addNum3").innerHTML = min;
+}
+function intMin(){
+    let intMin = 0;
+    let k = false
+    for(let i = 0 ; i < list.length ;i++){
+        if(list[i] >= 0){
+            k = true;
+            intMin = list[i]
+        }
+    }
+    for(let i = 0 ; i < list.length ; i++){
+        if(list[i] < min && list[i] >= 0){
+            intMin = list[i];
+        }
+    }
+    if(k == true){
+        getElement("addNum4").innerHTML = intMin;
+    }else{
+        getElement("addNum4").innerHTML = "Không có số nguyên dương nào ";
     }
 }
-document.getElementById("bai2").onclick = function(){
-    document.getElementById("b1").style.display = "none"
-    document.getElementById("b2").style.display = "block"
-    document.getElementById("b3").style.display = "none"
-    document.getElementById("b4").style.display = "none" 
-    document.getElementById("calc2").onclick = function(){
-        let elec = +document.getElementById("elec").value
-        let name = document.getElementById("name").value
-        if(elec <= 50 && elec >=0){
-            elec = elec * 500
-        }else if( elec > 50 && elec <= 100){
-            elec = 50*500 + (elec-50)*650 
-        }else if( elec > 100 && elec <= 200){
-            elec = 50*500 + 50 * 650 + (elec-100)*850
-        }else if( elec > 200 && elec <= 350){
-            elec = 50 * 500 + 50 * 650 + 100 * 850 + (elec-200)*1100 
-        }else if(elec > 350){
-            elec = 50*500 + 50 * 650 + 100 * 850 + 200*1100 + (elec-350)*1300
+function finalEven(){
+    for(let i = list.length -1 ; i >= 0 ;i-- ){
+        if(list[i] % 2 === 0){
+            return getElement("addNum5").innerHTML = list[i];
         }
-        elec = new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'VND' }).format(elec);
-        document.getElementById("result2").innerHTML = "Họ Tên : " + name +"; Tiền điện : " + elec  
+    }
+    return getElement("addNum5").innerHTML = "không có bất kỳ số chẵn nào"
+}
+function swap(){
+    let vt1 = getElement("vt1").value;
+    let vt2 = getElement("vt2").value;
+    let temp = list[vt2-1];
+    list[vt2-1] = list[vt1-1];
+    list[vt1-1] = temp 
+    getElement("addNum6").innerHTML = "Mảng sau khi đổi là : "
+    for(let i = 0 ; i < list.length ;i++){
+        getElement("addNum6").innerHTML += list[i] + ","
     }
 }
-document.getElementById("bai3").onclick = function(){
-    document.getElementById("b1").style.display = "none"
-    document.getElementById("b2").style.display = "none"
-    document.getElementById("b3").style.display = "block"
-    document.getElementById("b4").style.display = "none"  
-    document.getElementById("calc3").onclick = function(){
-        let name1 = document.getElementById("name1").value
-        let salary = +document.getElementById("salary").value
-        let depend = +document.getElementById("depend").value
-        if((salary - (4000000 - depend*1600000)) < 0){
-            alert("Thu nhập hàng năm ko đủ tiêu chuẩn !")
+function swapinc(){
+    for(let i = 0 ; i < list.length ; i++){
+        for(let j = i ; j < list.length ;j++){
+            if(list[i] > list[j]){
+                let temp = list[j];
+                list[j] = list[i];
+                list[i] = temp;
+            }
         }
-            let VAT = salary - 4000000 - depend*1600000
-            if(VAT <= 60000000){
-                VAT = VAT * (5/100)
-            }else if(VAT > 60000000 && VAT <= 120000000){
-                VAT = VAT * (10/100)
-            }else if(VAT > 120000000 && VAT <= 210000000){
-                VAT = VAT*(15/100)
-            }else if(VAT >210000000 && VAT<=384000000){
-                VAT = VAT*(20/100)
-            }else if(VAT > 384000000 && VAT <= 624000000){
-                VAT = VAT*(25/100)
-            }else if(VAT > 624000000 && VAT <=960000000){
-                VAT = VAT*(30/100)
+    }
+    getElement("addNum7").innerHTML = "Mảng sau khi sắp xếp là : "
+    for(let i = 0 ; i < list.length ;i++){
+    getElement("addNum7").innerHTML += list[i] + ","
+    }
+}
+function Firstsnt(){
+    let k = true;
+    for(let i = 0 ; i < list.length ; i++){
+        if(list[i] === 1 || list[i] === 2){
+            getElement("addNum8").innerHTML = list[i];
+        }
+        for(let j = 2 ; j < list[i] ; j++){
+            if(list[i] % j === 0){
+                k = false;
+                break;
+            }
+        }
+        if(k === true){
+            getElement("addNum8").innerHTML = " Số nguyên tố đầu tiên là : "
+            return getElement("addNum8").innerHTML = list[i]
+        }
+        k = true;
+    }
+    if(!getElement("addNum8").innerHTML){
+        return getElement("addNum8").innerHTML = -1;
+    }
+}
+function getinfo_1(){
+   
+    list2.push(+getElement("int").value);
+    getElement("addNum9_1").innerHTML += getElement("int").value + ","    
+}
+function int(){
+    let count = 0;
+    for(let i = 0 ; i < list2.length ; i++){
+        if(Number.isInteger(list2[i]) === true){
+            count++;
+        }
+    }
+    getElement("addNum9_2").innerHTML = "Số nguyên : " + count;
+}
+function compare(){
+    let Negcount = 0 ;
+    let Poscount = 0 ;
+    for(let i = 0 ; i < list.length ; i++){
+        if(Number.isInteger(list[i]) === true){
+            if(list[i] > 0){
+                Poscount++
             }else{
-                VAT = VAT*(35/100)
-            }
-        console.log(VAT)
-        VAT = new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'VND' }).format(VAT)
-        document.getElementById("result3").innerHTML = "Họ tên : "+ name1 + ", Tiền thuế thu nhập cá nhân: "+ VAT  
-    } 
-}   
-
-function bai4(){
-        let c1 = document.getElementById("c1").value
-        let c2 = +document.getElementById("c2").value
-        c2 = c2*7.5 + 25
-        c2 = new Intl.NumberFormat('en-IN',{style: 'currency', currency:'USD'}).format(c2)
-        document.getElementById("result4").innerHTML = "Mã khách hàng : "+ c1 + ", Tiền cáp : "+ c2
-    }  
-function bai4_1(){
-        let c1 = document.getElementById("c1").value
-        let c2 = +document.getElementById("c2").value
-        let connect = +document.getElementById("connect").value
-        if(connect <= 10){
-            connect = 75
-        }else{
-            connect = 75 + (connect-10)*5
-        }
-        c2 = c2*50 + connect + 15
-        c2 = new Intl.NumberFormat('en-IN',{style: 'currency', currency:'USD'}).format(c2)
-        document.getElementById("result4").innerHTML = "Mã khách hàng : "+ c1 + ", Tiền cáp : "+ c2
-
-}
-document.getElementById("bai4").onclick = function(){
-    document.getElementById("b1").style.display = "none"
-    document.getElementById("b2").style.display = "none"
-    document.getElementById("b3").style.display = "none"
-    document.getElementById("b4").style.display = "block" 
-    document.getElementById("object1").onchange = function(){
-        if(document.getElementById("object1").value === "ND"){
-            document.getElementById("connect").style.display = "none"
-            document.getElementById("calc4").onclick = function(){
-                bai4()
-            }
-        }else if(document.getElementById("object1").value ==="DN"){
-            document.getElementById("connect").style.display = "block"
-            document.getElementById("calc4").onclick = function(){
-                bai4_1()
+                Negcount++
             }
         }
     }
+    if(Negcount > Poscount){
+        getElement("addNum10").innerHTML = "Số âm > Số dương"
+    }else if( Negcount === Poscount){
+        getElement("addNum10").innerHTML = " Số âm = số dương "
+    }else {
+        getElement("addNum10").innerHTML = " Số âm < Số dương "
+    }
 }
+

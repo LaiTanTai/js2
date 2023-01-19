@@ -1,140 +1,262 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-     <!-- fontawesome -->
-     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-     <!-- My css -->
-     <link rel="stylesheet" href="./style.css">
-</head>
-<body>
-    <div class="box">
-        <div class="content" >
-            <div class="table">
-                <ul>
-                    <li><button id="bai1"> <i class="fa-sharp fa-solid fa-book"></i>Bài 1</button></li>
-                    <li><button id="bai2"> <i class="fa-sharp fa-solid fa-book"></i>Bài 2</button></li>
-                    <li><button id="bai3"> <i class="fa-sharp fa-solid fa-book"></i>Bài 3</button></li>
-                    <li><button id="bai4"> <i class="fa-sharp fa-solid fa-book"></i>Bài 4</button></li>
-                </ul>
-            </div>
-            <div class="container" style="display: none;" id="b1">
-                <p class="title"><i class="fa-sharp fa-solid fa-book"></i> Quản lý tuyển sinh</p>
-                <p class="intruction">
-                    <i class="fa-solid fa-lightbulb"></i>
-                    Đầu vào :
-                    <br>
-                    <br>
-                    Nhập vào điểm chuẩn, khu vực, đối tượng và điểm 3 môn </p>
-                <input id="standard" type="number" placeholder="Nhập điểm chuẩn">
-                <select id="area">
-                    <option value="0">Chọn khu vực</option>
-                    <option value="2">A</option>
-                    <option value="1">B</option>
-                    <option value="0.5">C</option>
-                </select>
-                <select id="object">
-                    <option value="0">Chọn đối tượng</option>
-                    <option value="2.5">1</option>
-                    <option value="1.5">2</option>
-                    <option value="0">3</option>
-                </select>
-                <br>
-                <br>
-                <input id="num-1" type="number" placeholder="Nhập điểm môn thứ nhất">
-                <input id="num-2" type="number" placeholder="Nhập điểm môn thứ hai">
-                <input id="num-3" type="number" placeholder="Nhập điểm môn thứ ba">
-                <br>
-                <button id="calc1">Kết quả</button>
-                <p class="intruction">
-                    Đầu ra :
-                    <br>
-                    <br>
-                    kết quả đậu hay rớt và tổng điểm 
-                </p>
-                <div class="final-result">
-                    <p class="output"><i class="fa-solid fa-hand-point-right"></i><span id="result1"></span></p>
+  <head>
+    <title>Title</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!-- fontawesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- MY CSS -->
+    <link rel="stylesheet" href="./style.css">
+  </head>
+  <body>
+    <div class="container">
+        <input class="mb-5 rounded" type="number" id="inputFirst" placeholder="Nhập số n">
+        <button class="btn btn-primary rounded-pill mb-2 ml-3" id="0" onclick="getinfo()">Thêm số</button>
+        <div class="input">
+        <p class="bg-info">
+            <i class="fa-solid fa-hand-point-right"></i><span id="addNum"></span>
+        </p>  
+        </div>
+        <div class="accordion" id="accordionExample">
+            <div class="card">
+                <div class="card-header" id="headingOne">
+                    <h2 class="mb-0">
+                        <span class="btn btn-link btn-block text-left" type="button" data-toggle="collapse"
+                            data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        Tổng số dương
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </span>
+                    </h2>
+                </div>
+    
+                <div id="collapseOne" class="collapse " aria-labelledby="headingOne" data-parent="#accordionExample">
+                    <div class="card-body">
+                        <div class="output">
+                            <button class="btn btn-primary rounded-pill mb-2 ml-3" id="1" onclick="intSum()">Tính Tổng</button>
+                            <p class="bg-info">
+                                <i class="fa-solid fa-hand-point-right"></i><span id="addNum1"></span>
+                            </p>  
+                            </div>
+                    </div>
                 </div>
             </div>
-            <div class="container" style="display: none;" id="b2">
-                <p class="title"><i class="fa-sharp fa-solid fa-book"></i> Tính tiền điện</p>
-                <p class="intruction">
-                    <i class="fa-solid fa-lightbulb"></i>
-                    Đầu vào :
-                    <br>
-                    <br>
-                    Nhập vào số kw điện mà bạn muốn tính thành tổng tiền </p>
-                <input id="name" type="text" placeholder="Nhập vào tên">
-                <input id="elec" placeholder="Số kw điện ">
-                <br>
-                <button id="calc2">Tính tiền điện</button>
-                <p class="intruction">
-                    Đầu ra :
-                    <br>
-                    <br>
-                    Tên người nhận đơn và số tiền điện 
-                </p>
-                <div class="final-result">
-                    <p class="output"><i class="fa-solid fa-hand-point-right"></i><span id="result2"></span></p>
+            <div class="card">
+                <div class="card-header" id="headingTwo">
+                    <h2 class="mb-0">
+                        <span class="btn btn-link btn-block text-left" type="button" data-toggle="collapse"
+                            data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                        Đếm số dương 
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </span>
+                    </h2>
+                </div>
+    
+                <div id="collapseTwo" class="collapse " aria-labelledby="headingTwo" data-parent="#accordionExample">
+                    <div class="card-body">
+                        <div class="output">
+                            <button class="btn btn-primary rounded-pill mb-2 ml-3" id="2" onclick="intCount()">Đếm số</button>
+                            <p class="bg-info">
+                                <i class="fa-solid fa-hand-point-right"></i><span id="addNum2"></span>
+                            </p>  
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="container" style="display: none;" id="b3">
-                <p class="title"><i class="fa-sharp fa-solid fa-book"></i> Tính thuế thu nhập cá nhân</p>
-                <p class="intruction">
-                    <i class="fa-solid fa-lightbulb"></i>
-                    Đầu vào :
-                    <br>
-                    <br>
-                    Nhập vào 3 số mà bạn muốn kiểm tra là số chẵn hay lẻ </p>
-                <input id="name1" type="text" placeholder="Nhập tên ">
-                <input id="salary" type="number" placeholder="Nhập tổng thu nhập năm">
-                <input id="depend" type="number" placeholder="Nhập số người phụ thuộc">
-                <br>
-                <button id="calc3">Tính tiền thuế</button>
-                <p class="intruction">
-                    Đầu ra :
-                    <br>
-                    <br>
-                   Tiền thuế và tên 
-                </p>
-                <div class="final-result">
-                    <p class="output"><i class="fa-solid fa-hand-point-right"></i><span id="result3"></span></p>
+            <div class="card">
+                <div class="card-header" id="headingThree">
+                    <h2 class="mb-0">
+                        <span class="btn btn-link btn-block text-left" type="button" data-toggle="collapse"
+                            data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
+                        Tìm số nhỏ nhất 
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </span>
+                    </h2>
+                </div>
+    
+                <div id="collapseThree" class="collapse " aria-labelledby="headingThree" data-parent="#accordionExample">
+                    <div class="card-body">
+                        <div class="output">
+                            <button class="btn btn-primary rounded-pill mb-2 ml-3" id="3" onclick="min()">Tìm số nhỏ nhất </button>
+                            <p class="bg-info">
+                                <i class="fa-solid fa-hand-point-right"></i><span id="addNum3"></span>
+                            </p>  
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="container" style="display: none;" id="b4">
-                <p class="title"><i class="fa-sharp fa-solid fa-book"></i> Tính tiền cáp </p>
-                <p class="intruction">
-                    <i class="fa-solid fa-lightbulb"></i>
-                    Đầu vào :
-                    <br>
-                    <br>
-                    Nhập vào loại khách hàng và số kết nối, số kênh cao cấp </p>
-                <select id="object1">
-                    <option>Chọn loại khách hàng</option>
-                    <option value="ND">Nhà Dân</option>
-                    <option value="DN">Doanh Nghiệp</option>
-                </select>
-                <input id="c1" type="number" placeholder="Nhập mã khách hàng">
-                <input id="c2" type="number" placeholder="Số kênh cao cấp">
-                <br>
-                <br>
-                <input id="connect" style="display: none ;" placeholder="Số kết nối">
-                <button id="calc4">Tính tiền cáp</button>
-                <p class="intruction">
-                    Đầu ra :
-                    <br>
-                    <br>
-                    Số tiền cáp của khách hàng và mã khách hàng
-                </p>
-                <div class="final-result">
-                    <p class="output"><i class="fa-solid fa-hand-point-right"></i><span id="result4"></span></p>
+            <div class="card">
+                <div class="card-header" id="headingFour">
+                    <h2 class="mb-0">
+                        <span class="btn btn-link btn-block text-left" type="button" data-toggle="collapse"
+                            data-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour">
+                        Tổng số dương nhỏ nhất 
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </span>
+                    </h2>
+                </div>
+    
+                <div id="collapseFour" class="collapse " aria-labelledby="headingFour" data-parent="#accordionExample">
+                    <div class="card-body">
+                        <div class="output">
+                            <button class="btn btn-primary rounded-pill mb-2 ml-3" id="4" onclick="intMin()">Tìm số dương nhỏ nhất</button>
+                            <p class="bg-info">
+                                <i class="fa-solid fa-hand-point-right"></i><span id="addNum4"></span>
+                            </p>  
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header" id="headingFive">
+                    <h2 class="mb-0">
+                        <span class="btn btn-link btn-block text-left" type="button" data-toggle="collapse"
+                            data-target="#collapseFive" aria-expanded="true" aria-controls="collapseFive">
+                        Tìm số chẵn cuối cùng
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </span>
+                    </h2>
+                </div>
+    
+                <div id="collapseFive" class="collapse " aria-labelledby="headingFive" data-parent="#accordionExample">
+                    <div class="card-body">
+                        <div class="output">
+                            <button class="btn btn-primary rounded-pill mb-2 ml-3" id="5" onclick="finalEven()">Tìm số chẵn</button>
+                            <p class="bg-info">
+                                <i class="fa-solid fa-hand-point-right"></i><span id="addNum5"></span>
+                            </p>  
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header" id="headingSix">
+                    <h2 class="mb-0">
+                        <span class="btn btn-link btn-block text-left" type="button" data-toggle="collapse"
+                            data-target="#collapseSix" aria-expanded="true" aria-controls="collapseSix">
+                        Đổi chỗ
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </span>
+                    </h2>
+                </div>
+    
+                <div id="collapseSix" class="collapse " aria-labelledby="headingSix" data-parent="#accordionExample">
+                    <div class="card-body">
+                        <div class="output">
+                            <input class="mb-5 rounded" type="number" id="vt1" placeholder="Nhập vị trí 1 ">
+                            <input class="mb-5 rounded" type="number" id="vt2" placeholder="Nhập vị trí 2 ">
+                            <button class="btn btn-primary rounded-pill mb-2 ml-3" id="6" onclick="swap()">Đổi chổ</button>
+                            <p class="bg-info">
+                                <i class="fa-solid fa-hand-point-right"></i><span id="addNum6"></span>
+                            </p>  
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header" id="headingSeven">
+                    <h2 class="mb-0">
+                        <span class="btn btn-link btn-block text-left" type="button" data-toggle="collapse"
+                            data-target="#collapseSeven" aria-expanded="true" aria-controls="collapseSeven">
+                        Sắp xếp tăng dần
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </span>
+                    </h2>
+                </div>
+    
+                <div id="collapseSeven" class="collapse " aria-labelledby="headingSeven" data-parent="#accordionExample">
+                    <div class="card-body">
+                        <div class="output">
+                            <button class="btn btn-primary rounded-pill mb-2 ml-3" id="7" onclick="swapinc()">Sắp xếp </button>
+                            <p class="bg-info">
+                                <i class="fa-solid fa-hand-point-right"></i><span id="addNum7"></span>
+                            </p>  
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header" id="headingEight">
+                    <h2 class="mb-0">
+                        <span class="btn btn-link btn-block text-left" type="button" data-toggle="collapse"
+                            data-target="#collapseEight" aria-expanded="true" aria-controls="collapseEight">
+                            Tìm số nguyên tố đầu tiên
+                            <i class="fa-solid fa-chevron-down"></i>
+                    </span>
+                    </h2>
+                </div>
+    
+                <div id="collapseEight" class="collapse " aria-labelledby="headingEight" data-parent="#accordionExample">
+                    <div class="card-body">
+                        <div class="output">
+                            <button class="btn btn-primary rounded-pill mb-2 ml-3" id="8" onclick="Firstsnt()">Tìm số nguyên tố </button>
+                            <p class="bg-info">
+                                <i class="fa-solid fa-hand-point-right"></i><span id="addNum8"></span>
+                            </p>  
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header" id="headingNine">
+                    <h2 class="mb-0">
+                        <span class="btn btn-link btn-block text-left" type="button" data-toggle="collapse"
+                            data-target="#collapseNine" aria-expanded="true" aria-controls="collapseNine">
+                        Đếm số nguyên 
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </span>
+                    </h2>
+                </div>
+    
+                <div id="collapseNine" class="collapse " aria-labelledby="headingNine" data-parent="#accordionExample">
+                    <div class="card-body">
+                        <div class="output">
+                            <input class="mb-5 rounded" type="number" id="int" placeholder="Nhập số ">
+                            <button class="btn btn-primary rounded-pill mb-2 ml-3" id="0" onclick="getinfo_1()">Thêm số</button>
+                            <p class="bg-info">
+                                <i class="fa-solid fa-hand-point-right"></i><span id="addNum9_1"></span>
+                            </p> 
+                            <button class="btn btn-primary rounded-pill mb-2 ml-3" id="9" onclick="int()" >Đêm số nguyên</button>
+                            <p class="bg-info">
+                                <i class="fa-solid fa-hand-point-right"></i><span id="addNum9_2"></span>
+                            </p>  
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header" id="headingTen">
+                    <h2 class="mb-0">
+                        <span class="btn btn-link btn-block text-left" type="button" data-toggle="collapse"
+                            data-target="#collapseTen" aria-expanded="true" aria-controls="collapseTen">
+                        So sánh số lượng số âm và số dương 
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </span>
+                    </h2>
+                </div>
+    
+                <div id="collapseTen" class="collapse " aria-labelledby="headingTen" data-parent="#accordionExample">
+                    <div class="card-body">
+                        <div class="output">
+                            <button class="btn btn-primary rounded-pill mb-2 ml-3" id="10" onclick="compare()">So sánh</button>
+                            <p class="bg-info">
+                                <i class="fa-solid fa-hand-point-right"></i><span id="addNum10"></span>
+                            </p>  
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+    <!-- Optional JavaScript -->
     <script src="./index.js"></script>
-</body>
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </body>
 </html>
